@@ -33,6 +33,7 @@ drugfront-v2/
 │   ├── presession-2.md
 │   └── stakeholder-questions.md
 ├── app/                           ← v2 application (Tauri + React)
+│   ├── CLAUDE.md                  ← dev commands (build, run, test)
 │   ├── src-tauri/                 ← Rust backend
 │   │   ├── src/
 │   │   │   ├── main.rs
