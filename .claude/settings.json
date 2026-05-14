@@ -6,10 +6,8 @@
       "Read(./legacy/**)",
       "Read(./docs/**)",
       "Write(./docs/**)",
-      "Read(./src-tauri/**)",
-      "Write(./src-tauri/**)",
-      "Read(./src/**)",
-      "Write(./src/**)",
+      "Read(./app/**)",
+      "Write(./app/**)",
       "Read(./migration-scripts/**)",
       "Write(./migration-scripts/**)",
       "Bash(find ./legacy/**)",
@@ -48,7 +46,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "if echo \"$CLAUDE_FILE_PATHS\" | grep -q '^legacy/'; then echo 'BLOCKED: legacy/ is read-only. Document findings in docs/ instead.' && exit 1; fi",
+            "command": "if echo \"$CLAUDE_FILE_PATHS\" | grep -q 'legacy/'; then echo 'BLOCKED: legacy/ is read-only. Document findings in docs/ instead.' && exit 1; fi",
             "timeout": 5
           }
         ]
@@ -60,7 +58,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "if echo \"$CLAUDE_FILE_PATHS\" | grep -qE '\\.(ts|tsx)$'; then npx tsc --noEmit --skipLibCheck 2>&1 | head -20 || echo '⚠️ TypeScript errors detected'; fi",
+            "command": "if echo \"$CLAUDE_FILE_PATHS\" | grep -qE '\\.(ts|tsx)$'; then cd app && npx tsc --noEmit --skipLibCheck 2>&1 | head -20 || echo 'TypeScript errors detected'; fi",
             "timeout": 30
           }
         ]
@@ -70,7 +68,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "if echo \"$CLAUDE_FILE_PATHS\" | grep -qE '\\.rs$'; then cd src-tauri && cargo check 2>&1 | tail -10 || echo '⚠️ Rust errors detected'; fi",
+            "command": "if echo \"$CLAUDE_FILE_PATHS\" | grep -qE '\\.rs$'; then cd app/src-tauri && cargo check 2>&1 | tail -10 || echo 'Rust errors detected'; fi",
             "timeout": 60
           }
         ]
