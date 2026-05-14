@@ -14,8 +14,7 @@ pharmacy domain (pricing tiers, promotions, loyalty, allergy checking) must be p
 ```
 drugfront-v2/
 ├── legacy/DrugFront               ← VB.NET source — READ-ONLY, never modify
-│   ├── src/                       ← .vb form and module files
-│   ├── data/                      ← data.mdb, config files
+│   ├── .                          ← .vb form and module files, data.mdb, config files
 │   └── Web References/            ← SOAP .asmx service definitions
 ├── docs/                          ← migration brain, source of truth
 │   ├── data-archaeology.md
@@ -51,10 +50,7 @@ drugfront-v2/
 │   └── types/
 ├── migration-scripts/             ← one-time .mdb → SQLite migration tools
 ├── .claude/
-│   ├── CLAUDE.md                  ← this file
-│   ├── settings.json
-│   ├── agents/
-│   └── skills/
+├── CLAUDE.md
 └── tauri.conf.json
 ```
 
