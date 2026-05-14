@@ -129,3 +129,56 @@ Device model not documented. SDK closed-source.
 8 comprehensive archaeology files created. Ready for architecture review.
 
 Proceed when approved by project manager.
+
+---
+
+# Session 2a Handoff: Frontend Scaffold Complete
+
+**Date:** 2026-05-14
+**Phase:** Frontend Template Setup
+**Status:** COMPLETE
+
+## What Was Done
+
+- Created `app/` directory to isolate v2 code from legacy source
+- Scaffolded Tauri v2 + React 18 + TypeScript with Vite
+- Installed and configured all dependencies (see `app/package.json`)
+
+## Stack
+
+| Layer | Choice |
+|-------|--------|
+| Desktop shell | Tauri v2 |
+| Frontend | React 18 + TypeScript + Vite |
+| UI components | MUI v6 with Thai locale (`thTH`) + Sarabun font |
+| State | Zustand (replaces DrugMod.vb globals) |
+| Async / caching | TanStack Query v5 (offline-first: `staleTime: Infinity`) |
+| Forms | React Hook Form + Zod |
+| Routing | React Router v6 |
+| DB (Rust) | sqlx 0.8 + SQLite |
+| Auth (Rust) | bcrypt 0.15 |
+
+## Files Created
+
+- `app/src/store/session.ts` — Zustand session store, maps all DrugMod.vb globals, `hasPrivilege()` replicates VB case-insensitive `InStr()`
+- `app/src/api/index.ts` — `tauriInvoke<T>()` wrapper + `Commands` name registry
+- `app/src/api/auth.ts` — typed login/quickAuth/changePassword wrappers
+- `app/src/types/errors.ts` — TypeScript mirror of Rust `AppError` + Thai error messages
+- `app/src/theme.ts` — MUI theme (Sarabun, `thTH`, pharmacy color palette)
+- `app/src/App.tsx` — React Router with `ProtectedRoute` guard
+- `app/src/features/*/` — 7 placeholder pages (Thai labels)
+- `app/src-tauri/src/error.rs` — `AppError` enum (`#[serde(tag="kind")]` → TS discriminated union)
+- `app/src-tauri/src/commands/auth.rs` — login/quickAuth/changePassword stubs
+- `app/src-tauri/src/db/` — SQLite pool init + first migration (WAL, FK on)
+
+## Verification
+
+- `npx tsc --noEmit` — ✅ zero errors
+- `cargo check` — ✅ zero warnings
+
+## Next Steps (Session 2b)
+
+1. Finalize `docs/eav-strategy.md` (SQLite schema decisions)
+2. Approve auth design — bcrypt migration strategy for legacy plaintext passwords
+3. Write first real migration in `app/src-tauri/src/db/migrations/`
+4. Implement `login` command in `app/src-tauri/src/commands/auth.rs`

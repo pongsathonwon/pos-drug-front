@@ -1,0 +1,21 @@
+-- DrugFront POS v2 — SQLite Schema Reference
+-- DO NOT run this file directly — use migrations in db/migrations/ instead.
+-- See: docs/data-archaeology.md for legacy table mapping.
+-- See: docs/eav-strategy.md for EAV normalization decisions (Session 2).
+
+-- Tables to be defined in migrations (one migration per domain module):
+--   empl_info        ← EmplInfo (bcrypt hashed passwords, not plaintext)
+--   empl_position    ← EmplPosition
+--   good_info        ← GoodInfo (EAV columns flattened per eav-strategy.md)
+--   good_barcode     ← GoodBarcode
+--   unit_info        ← UnitInfo
+--   cust_info        ← CustInfo
+--   hist_sale        ← HistSale (sync_status enum replaces flag strings)
+--   sale_list        ← SaleList
+--   card_info        ← CardInfo
+--   sale_pro         ← SalePro (promotions)
+--   branch_info      ← BranchInfo
+--   drug_group       ← DrugGroup
+--   drug_allergic    ← DrugAllergic
+--   log_record       ← LogRecord
+--   sync_queue       ← replaces SqlText offline queue (structured columns, not raw SQL)
