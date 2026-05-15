@@ -1,2 +1,42 @@
 # Claude Code — local-only settings (never commit)
 .claude/settings.local.json
+
+# ── app/ (Tauri v2 + React frontend) ──────────────────────────────────────────
+
+# Dependencies
+app/node_modules/
+
+# Build output
+app/dist/
+app/dist-ssr/
+
+# Tauri build output
+app/src-tauri/target/
+app/src-tauri/gen/
+
+# SQLx offline query cache (regenerated via `cargo sqlx prepare`)
+app/src-tauri/.sqlx/
+
+# Tauri auto-generated WIX installer files
+app/src-tauri/WixTools/
+
+# ── General ───────────────────────────────────────────────────────────────────
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Editor / OS
+*.suo
+*.user
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+
+# TypeScript incremental build info
+*.tsbuildinfo

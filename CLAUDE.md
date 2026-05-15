@@ -21,37 +21,69 @@ drugfront-v2/
 │   ├── operational-archaeology.md
 │   ├── auth-spec.md
 │   ├── business-rules.md
-│   ├── schema-proposals.md
+│   ├── schema-proposals.md        ← created in Session 2b
 │   ├── command-mapping.md
-│   ├── eav-strategy.md
+│   ├── eav-strategy.md            ← created in Session 2b
 │   ├── vb-gotchas.md
 │   ├── system-requirements.md
 │   ├── migration-tracker.md
-│   └── session-handoff.md
-├── src-tauri/                     ← Rust backend
-│   ├── src/
-│   │   ├── main.rs
-│   │   ├── commands/              ← one file per SOAP operation ported
-│   │   └── db/
-│   │       ├── schema.sql
-│   │       └── migrations/
-│   └── Cargo.toml
-├── src/                           ← React + TypeScript frontend
-│   ├── api/                       ← typed invoke() wrappers, one per command
-│   ├── features/                  ← feature-sliced by domain module
-│   │   ├── auth/
-│   │   ├── sales/
-│   │   ├── inventory/
-│   │   ├── loyalty/
-│   │   ├── promotions/
-│   │   ├── accounting/
-│   │   └── reports/
-│   ├── components/
-│   └── types/
-├── migration-scripts/             ← one-time .mdb → SQLite migration tools
+│   ├── session-handoff.md
+│   └── verification/              ← port-verifier sign-off reports (Session 3+)
+├── tasks/                         ← pre-session checklists and stakeholder questions
+│   ├── presession-2.md
+│   └── stakeholder-questions.md
+├── app/                           ← v2 application (Tauri + React)
+│   ├── CLAUDE.md                  ← dev commands (build, run, test)
+│   ├── src-tauri/                 ← Rust backend
+│   │   ├── src/
+│   │   │   ├── main.rs
+│   │   │   ├── lib.rs
+│   │   │   ├── error.rs           ← AppError enum → TypeScript discriminated union
+│   │   │   ├── commands/          ← one file per SOAP operation ported
+│   │   │   │   └── auth.rs
+│   │   │   └── db/
+│   │   │       ├── mod.rs
+│   │   │       ├── schema.sql
+│   │   │       └── migrations/
+│   │   ├── capabilities/
+│   │   ├── Cargo.toml
+│   │   └── tauri.conf.json
+│   ├── src/                       ← React + TypeScript frontend
+│   │   ├── api/                   ← typed invoke() wrappers, one per command
+│   │   │   ├── index.ts           ← tauriInvoke<T>() wrapper + Commands registry
+│   │   │   └── auth.ts
+│   │   ├── features/              ← feature-sliced by domain module
+│   │   │   ├── auth/
+│   │   │   ├── sales/
+│   │   │   ├── inventory/
+│   │   │   ├── loyalty/
+│   │   │   ├── promotions/
+│   │   │   ├── accounting/
+│   │   │   └── reports/
+│   │   ├── store/
+│   │   │   └── session.ts         ← Zustand session store (replaces DrugMod.vb globals)
+│   │   ├── components/
+│   │   ├── types/
+│   │   │   └── errors.ts          ← TypeScript mirror of Rust AppError + Thai messages
+│   │   ├── theme.ts               ← MUI theme (Sarabun, thTH, pharmacy palette)
+│   │   ├── App.tsx                ← React Router + ProtectedRoute guard
+│   │   └── main.tsx
+│   ├── index.html
+│   ├── vite.config.ts
+│   ├── tsconfig.json
+│   └── package.json
+├── migration-scripts/             ← one-time .mdb → SQLite migration tools (Session 3+)
 ├── .claude/
-├── CLAUDE.md
-└── tauri.conf.json
+│   ├── agents/                    ← custom agent definitions
+│   │   ├── archaeologist.md
+│   │   ├── port-verifier.md
+│   │   ├── schema-designer.md
+│   │   ├── soap-porter.md
+│   │   ├── sqlite-migrator.md
+│   │   ├── react-component.md
+│   │   └── vb-reader.md
+│   └── settings.json
+└── CLAUDE.md
 ```
 
 ---
